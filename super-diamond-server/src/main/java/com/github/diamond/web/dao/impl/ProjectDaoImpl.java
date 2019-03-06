@@ -276,9 +276,9 @@ public class ProjectDaoImpl implements ProjectDao {
             sql = "SELECT DISTINCT b.ID, b.PROJ_CODE, b.PROJ_NAME, a.USER_NAME, b.OWNER_ID, b.IS_COMMON ";
 
             if (mode == ProjectQueryMode.Administrative) {
-                sql += ",c.ROLE_CODE FROM CONF_PROJECT b JOIN  CONF_PROJECT_USER_ROLE c ON b.ID = c.PROJ_ID AND c.USER_ID = ? AND c.ROLE_CODE=\"admin\" JOIN conf_user a ON c.USER_ID = a.ID ";
+                sql += ",c.ROLE_CODE FROM CONF_PROJECT b JOIN  CONF_PROJECT_USER_ROLE c ON b.ID = c.PROJ_ID AND c.USER_ID = ? AND c.ROLE_CODE=\"admin\" JOIN CONF_USER a ON c.USER_ID = a.ID ";
             } else if (mode == ProjectQueryMode.Participant) {
-                sql += " FROM CONF_PROJECT b JOIN CONF_PROJECT_USER c ON b.ID = c.PROJ_ID AND c.USER_ID = ? JOIN conf_user a ON c.USER_ID = a.ID ";
+                sql += " FROM CONF_PROJECT b JOIN CONF_PROJECT_USER c ON b.ID = c.PROJ_ID AND c.USER_ID = ? JOIN CONF_USER a ON c.USER_ID = a.ID ";
             }
 
             sql += " WHERE b.DELETE_FLAG = 0 ORDER BY b.id asc limit ?,?";
